@@ -141,6 +141,18 @@
 					event.stopPropagation();
 					event.preventDefault();
 
+					// Get email value.
+					var email = document.getElementById('email').value;
+
+					// Basic email validation.
+					var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+					if (!email || !emailRegex.test(email)) {
+						// Show failure message.
+						$message._show('failure', 'Por favor, introduce un correo electrónico válido.');
+						return;
+					}
+
 					// Hide message.
 						$message._hide();
 
@@ -148,21 +160,18 @@
 						$submit.disabled = true;
 
 					// Process form.
-					// Note: Doesn't actually do anything yet (other than report back with a "thank you"),
-					// but there's enough here to piece together a working AJAX submission call that does.
-						window.setTimeout(function() {
+					window.setTimeout(function() {
 
-							// Reset form.
-								$form.reset();
+						// Reset form.
+							$form.reset();
 
-							// Enable submit.
-								$submit.disabled = false;
+						// Enable submit.
+							$submit.disabled = false;
 
-							// Show message.
-								$message._show('success', 'Thank you!');
-								//$message._show('failure', 'Something went wrong. Please try again.');
+						// Show success message.
+							$message._show('success', '¡Gracias! El formulario ha sido validado correctamente. Las suscripciones aún no están habilitadas.');
 
-						}, 750);
+					}, 750);
 
 				});
 
